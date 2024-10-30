@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmikgv6re84ji"]
+
+[ext_resource type="Texture2D" uid="uid://cxtxykuimhgsp" path="res://Assets/DWG_Logo.png" id="1_3nyu3"]
+[ext_resource type="Texture2D" uid="uid://c3ftndjd3f2lp" path="res://Assets/frame.webp" id="2_fv0pb"]
+[ext_resource type="Texture2D" uid="uid://c5xs1gmqcfkwe" path="res://Assets/White Square.png" id="3_cmi7b"]
+[ext_resource type="Texture2D" uid="uid://dmt8hjulapxb6" path="res://Assets/symb1.webp" id="3_sekbl"]
+[ext_resource type="Script" path="res://pieceFall.gd" id="4_cgskr"]
+[ext_resource type="Texture2D" uid="uid://cwllrwk1omwo2" path="res://Assets/symb2.webp" id="5_s1300"]
+[ext_resource type="Texture2D" uid="uid://67c6lh5me4ji" path="res://Assets/symb3.webp" id="6_e4edk"]
+
+[sub_resource type="Gradient" id="Gradient_nr0ee"]
+offsets = PackedFloat32Array(0, 0.980519)
+colors = PackedColorArray(0.713726, 0.243137, 0.87451, 1, 0.898039, 0.482353, 0.247059, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0l24d"]
+gradient = SubResource("Gradient_nr0ee")
+
+[sub_resource type="ImageTexture" id="ImageTexture_eex7p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb8pa"]
+size = Vector2(20, 39.0563)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(1, -6)
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = 1156.0
+offset_top = 6.0
+offset_right = 2306.0
+offset_bottom = 666.0
+rotation = 1.5708
+scale = Vector2(0.601199, 1.76098)
+texture = SubResource("GradientTexture1D_0l24d")
+
+[node name="Start Menu" type="Node2D" parent="."]
+visible = false
+
+[node name="DwgLogo" type="Sprite2D" parent="Start Menu"]
+position = Vector2(600, 309)
+scale = Vector2(0.28351, 0.28351)
+texture = ExtResource("1_3nyu3")
+
+[node name="StartButton" type="Button" parent="Start Menu"]
+offset_left = 535.0
+offset_top = 459.0
+offset_right = 658.0
+offset_bottom = 495.0
+text = "Play"
+
+[node name="Game" type="Node2D" parent="."]
+position = Vector2(535, 459)
+
+[node name="Spin Button" type="Button" parent="Game"]
+offset_left = -185.0
+offset_top = 90.0
+offset_right = -144.0
+offset_bottom = 121.0
+scale = Vector2(2.77, 2)
+text = "Spin"
+
+[node name="Stop Button" type="Button" parent="Game"]
+offset_left = 98.0
+offset_top = 90.0
+offset_right = 141.0
+offset_bottom = 121.0
+scale = Vector2(2.77, 2)
+text = "Stop"
+
+[node name="Sprite2D" type="Sprite2D" parent="Game"]
+position = Vector2(11, -179)
+scale = Vector2(0.369281, 0.369281)
+texture = SubResource("ImageTexture_eex7p")
+
+[node name="Frame" type="Sprite2D" parent="Game"]
+position = Vector2(11, -179)
+scale = Vector2(0.369281, 0.369281)
+texture = ExtResource("2_fv0pb")
+
+[node name="Wheel area" type="Sprite2D" parent="Game"]
+clip_children = 2
+position = Vector2(11.5, -178)
+scale = Vector2(2.35938, 3.5)
+texture = ExtResource("3_cmi7b")
+
+[node name="Piece1" type="CharacterBody2D" parent="Game/Wheel area"]
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="Game/Wheel area/Piece1"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("3_sekbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Wheel area/Piece1"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+
+[node name="Piece2" type="CharacterBody2D" parent="Game/Wheel area"]
+position = Vector2(0.211921, 42.8571)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="Game/Wheel area/Piece2"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("5_s1300")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Wheel area/Piece2"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+
+[node name="Piece3" type="CharacterBody2D" parent="Game/Wheel area"]
+position = Vector2(0.211921, -43.7143)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="Game/Wheel area/Piece3"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("6_e4edk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Wheel area/Piece3"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+
+[node name="Symb2" type="Sprite2D" parent="Game/Wheel area"]
+visible = false
+position = Vector2(-0.211914, 0.571406)
+scale = Vector2(0.10596, 0.0714286)
+texture = ExtResource("5_s1300")
+
+[node name="Symb3" type="Sprite2D" parent="Game/Wheel area"]
+visible = false
+position = Vector2(-0.211914, 42.8571)
+scale = Vector2(0.10596, 0.0714286)
+texture = ExtResource("6_e4edk")
+
+[node name="Symb5" type="Sprite2D" parent="Game/Wheel area"]
+visible = false
+position = Vector2(-0.211914, -85.4286)
+scale = Vector2(0.10596, 0.0714286)
+texture = ExtResource("6_e4edk")
+
+[node name="Symb4" type="Sprite2D" parent="Game/Wheel area"]
+visible = false
+position = Vector2(-0.211914, 85.7142)
+scale = Vector2(0.10596, 0.0714286)
+texture = ExtResource("3_sekbl")

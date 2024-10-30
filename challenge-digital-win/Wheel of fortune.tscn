@@ -1,0 +1,268 @@
+[gd_scene load_steps=21 format=3 uid="uid://dmikgv6re84ji"]
+
+[ext_resource type="Texture2D" uid="uid://cxtxykuimhgsp" path="res://Assets/DWG_Logo.png" id="1_3nyu3"]
+[ext_resource type="Script" path="res://Scripts/start_button.gd" id="2_5280x"]
+[ext_resource type="Texture2D" uid="uid://c3ftndjd3f2lp" path="res://Assets/frame.webp" id="2_fv0pb"]
+[ext_resource type="Texture2D" uid="uid://c5xs1gmqcfkwe" path="res://Assets/White Square.png" id="3_cmi7b"]
+[ext_resource type="Texture2D" uid="uid://dmt8hjulapxb6" path="res://Assets/symb1.webp" id="3_sekbl"]
+[ext_resource type="Script" path="res://Scripts/PieceFall.gd" id="4_cgskr"]
+[ext_resource type="Script" path="res://Scripts/GetChildren.gd" id="4_g6k0b"]
+[ext_resource type="Texture2D" uid="uid://cwllrwk1omwo2" path="res://Assets/symb2.webp" id="5_s1300"]
+[ext_resource type="Texture2D" uid="uid://67c6lh5me4ji" path="res://Assets/symb3.webp" id="6_e4edk"]
+[ext_resource type="Script" path="res://PieceCheck.gd" id="10_k87x1"]
+[ext_resource type="Texture2D" uid="uid://bk7rhwlbl5qxv" path="res://Assets/rounded button Orange.png" id="10_v6ju1"]
+[ext_resource type="FontFile" uid="uid://bnp3434ydqxmj" path="res://Fonts/Poppins-Medium.ttf" id="10_vfy5v"]
+
+[sub_resource type="Gradient" id="Gradient_nr0ee"]
+offsets = PackedFloat32Array(0, 0.980519)
+colors = PackedColorArray(0.713726, 0.243137, 0.87451, 1, 0.898039, 0.482353, 0.247059, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0l24d"]
+gradient = SubResource("Gradient_nr0ee")
+
+[sub_resource type="ImageTexture" id="ImageTexture_eex7p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb8pa"]
+size = Vector2(20, 39.0563)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp3uc"]
+size = Vector2(62.3045, 41.1429)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o80h5"]
+radius = 58.35
+
+[sub_resource type="Gradient" id="Gradient_igvta"]
+colors = PackedColorArray(0, 0, 0, 0.807843, 0, 0, 0, 0.0980392)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bhgq6"]
+gradient = SubResource("Gradient_igvta")
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(1, -6)
+metadata/_edit_horizontal_guides_ = [-406.0]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = 1156.0
+offset_top = 6.0
+offset_right = 2306.0
+offset_bottom = 666.0
+rotation = 1.5708
+scale = Vector2(0.601199, 1.76098)
+texture = SubResource("GradientTexture1D_0l24d")
+
+[node name="Start Menu" type="Node2D" parent="."]
+script = ExtResource("2_5280x")
+
+[node name="DwgLogo" type="Sprite2D" parent="Start Menu"]
+position = Vector2(600, 309)
+scale = Vector2(0.28351, 0.28351)
+texture = ExtResource("1_3nyu3")
+
+[node name="StartButton" type="Button" parent="Start Menu"]
+offset_left = 535.0
+offset_top = 459.0
+offset_right = 726.0
+offset_bottom = 515.0
+theme_override_fonts/font = ExtResource("10_vfy5v")
+text = "Play"
+
+[node name="GameMain" type="Node2D" parent="."]
+visible = false
+position = Vector2(535, 459)
+
+[node name="SpinButton" type="Button" parent="GameMain"]
+modulate = Color(0.854902, 0.482353, 0.227451, 1)
+offset_left = -185.0
+offset_top = 90.0
+offset_right = -144.0
+offset_bottom = 121.0
+scale = Vector2(3, 2.166)
+theme_override_fonts/font = ExtResource("10_vfy5v")
+text = "SPIN"
+
+[node name="Stop Button" type="Button" parent="GameMain"]
+modulate = Color(0.854902, 0.482353, 0.227451, 1)
+offset_left = 98.0
+offset_top = 90.0
+offset_right = 141.0
+offset_bottom = 121.0
+scale = Vector2(3, 2.166)
+theme_override_fonts/font = ExtResource("10_vfy5v")
+text = "STOP"
+
+[node name="Sprite2D" type="Sprite2D" parent="GameMain"]
+position = Vector2(11, -179)
+scale = Vector2(0.369281, 0.369281)
+texture = SubResource("ImageTexture_eex7p")
+
+[node name="Frame" type="Sprite2D" parent="GameMain"]
+position = Vector2(11, -179)
+scale = Vector2(0.369281, 0.369281)
+texture = ExtResource("2_fv0pb")
+
+[node name="Wheel area" type="Sprite2D" parent="GameMain"]
+clip_children = 2
+position = Vector2(11.5, -178)
+scale = Vector2(2.35938, 3.5)
+texture = ExtResource("3_cmi7b")
+script = ExtResource("4_g6k0b")
+
+[node name="Piece3" type="CharacterBody2D" parent="GameMain/Wheel area" groups=["Piece"]]
+position = Vector2(0, -172)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="GameMain/Wheel area/Piece3"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("6_e4edk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece3"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+disabled = true
+
+[node name="BlueArea" type="Area2D" parent="GameMain/Wheel area/Piece3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece3/BlueArea"]
+position = Vector2(0, -0.571426)
+shape = SubResource("RectangleShape2D_fp3uc")
+
+[node name="Piece1" type="CharacterBody2D" parent="GameMain/Wheel area" groups=["Piece"]]
+position = Vector2(0, -128)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="GameMain/Wheel area/Piece1"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("3_sekbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece1"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+disabled = true
+
+[node name="SilverArea" type="Area2D" parent="GameMain/Wheel area/Piece1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece1/SilverArea"]
+position = Vector2(0, -0.571426)
+shape = SubResource("RectangleShape2D_fp3uc")
+
+[node name="Piece2" type="CharacterBody2D" parent="GameMain/Wheel area" groups=["Piece"]]
+position = Vector2(0, -88)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="GameMain/Wheel area/Piece2"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("5_s1300")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece2"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+disabled = true
+
+[node name="PurpleArea" type="Area2D" parent="GameMain/Wheel area/Piece2"]
+position = Vector2(0, 132)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece2/PurpleArea"]
+position = Vector2(0, -0.571426)
+shape = SubResource("RectangleShape2D_fp3uc")
+
+[node name="Piece4" type="CharacterBody2D" parent="GameMain/Wheel area" groups=["Piece"]]
+position = Vector2(0, -44)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="GameMain/Wheel area/Piece4"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("6_e4edk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece4"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+disabled = true
+
+[node name="BlueArea" type="Area2D" parent="GameMain/Wheel area/Piece4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece4/BlueArea"]
+position = Vector2(0, -0.571426)
+shape = SubResource("RectangleShape2D_fp3uc")
+
+[node name="Piece5" type="CharacterBody2D" parent="GameMain/Wheel area" groups=["Piece"]]
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="GameMain/Wheel area/Piece5"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("3_sekbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece5"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+disabled = true
+
+[node name="SilverArea" type="Area2D" parent="GameMain/Wheel area/Piece5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece5/SilverArea"]
+position = Vector2(0, -0.571426)
+shape = SubResource("RectangleShape2D_fp3uc")
+
+[node name="Piece6" type="CharacterBody2D" parent="GameMain/Wheel area" groups=["Piece"]]
+position = Vector2(0, 44)
+script = ExtResource("4_cgskr")
+
+[node name="Symb1" type="Sprite2D" parent="GameMain/Wheel area/Piece6"]
+scale = Vector2(0.10942, 0.0734363)
+texture = ExtResource("5_s1300")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece6"]
+scale = Vector2(3.1583, 1.10048)
+shape = SubResource("RectangleShape2D_kb8pa")
+disabled = true
+
+[node name="PurpleArea" type="Area2D" parent="GameMain/Wheel area/Piece6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Wheel area/Piece6/PurpleArea"]
+position = Vector2(0, -0.571426)
+shape = SubResource("RectangleShape2D_fp3uc")
+
+[node name="Check" type="Area2D" parent="GameMain"]
+position = Vector2(9, -182)
+script = ExtResource("10_k87x1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMain/Check"]
+shape = SubResource("CircleShape2D_o80h5")
+
+[node name="WinScreen" type="Node2D" parent="."]
+visible = false
+position = Vector2(535, 459)
+
+[node name="Sprite2D" type="Sprite2D" parent="WinScreen"]
+position = Vector2(42.5, -118)
+scale = Vector2(4.59766, 676)
+texture = SubResource("GradientTexture1D_bhgq6")
+
+[node name="RoundedButtonOrange" type="Sprite2D" parent="WinScreen"]
+position = Vector2(31, -178)
+scale = Vector2(0.492063, 0.492063)
+texture = ExtResource("10_v6ju1")
+
+[node name="Label" type="Label" parent="WinScreen"]
+offset_left = -117.0
+offset_top = -235.0
+offset_right = 184.0
+offset_bottom = -191.0
+theme_override_fonts/font = ExtResource("10_vfy5v")
+theme_override_font_sizes/font_size = 31
+text = "CONGRATULATIONS"
+
+[node name="Label2" type="Label" parent="WinScreen"]
+offset_left = -100.0
+offset_top = -172.0
+offset_right = 155.0
+offset_bottom = -105.0
+theme_override_fonts/font = ExtResource("10_vfy5v")
+theme_override_font_sizes/font_size = 47
+text = "YOU WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="Start Menu/StartButton" to="Start Menu" method="_on_start_button_button_up"]
+[connection signal="button_up" from="GameMain/SpinButton" to="GameMain/Wheel area" method="_on_spin_button_button_up"]
+[connection signal="button_up" from="GameMain/Stop Button" to="GameMain/Wheel area" method="_on_stop_button_button_up"]
+[connection signal="area_entered" from="GameMain/Check" to="GameMain/Check" method="_on_area_entered"]
